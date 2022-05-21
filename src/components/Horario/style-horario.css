@@ -1,0 +1,63 @@
+.pagina-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagina-2 p {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 0.04em;
+    color: #293845;
+    padding: 45px 0;
+    margin-top: 67px;
+}
+
+.sessoes {
+    width: 90%;
+    margin-bottom: 117px;
+}
+
+.rodape {
+    width: 100%;
+    height: 117px;
+    background-color: #DFE6ED;
+    padding: 14px 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+}
+
+.rodape img {
+    width: 64px;
+    height: 89px;
+    padding: 8px;
+    background-color: #ffffff;
+    margin-right: 14px;
+}
+
+.rodape h2 {
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 30px;
+    color: #293845;
+}
+
+.loading {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;
+}
+
+.loading h6 {
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 30px;
+    color: #595f64;
+}
