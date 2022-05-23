@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Rodape from "../Rodape/Rodape";
 import Assento from "../Assento/Assento";
@@ -16,19 +16,21 @@ function criaAssentos(array, setAssentos) {
     setAssentos(assentosAux);
 }
 
-export default function PaginaSessoes() {
+export default function PaginaSessoes({ dadosSucesso, setDadosSucesso }) {
     const { idSessao } = useParams();
     const [dadosSessao, setDadosSessao] = React.useState({});
     const [erro, setErro] = React.useState(false);
     const [assentos, setAssentos] = React.useState([]);
     const [nome, setNome] = React.useState("");
     const [cpf, setCpf] = React.useState("");
+    const navigate = useNavigate();
 
     React.useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`);
         promise.then((response) => {
             setDadosSessao({ ...response.data })
             criaAssentos([...response.data.seats], setAssentos);
+            setDadosSucesso({titulo: response.data.movie.title, data: response.data.day.date, horario: response.data.name})
         })
             .catch((response) => {
                 setErro(true);
@@ -38,8 +40,13 @@ export default function PaginaSessoes() {
     function submitForm(event) {
         event.preventDefault();
         const idsAssentos = [];
+        const numAssentos = []
         const assentosSelecionados = assentos.filter((assento) => assento.selecionado);
-        assentosSelecionados.map((assentoSelecionado) => idsAssentos.push(assentoSelecionado.id));
+        assentosSelecionados.map((assentoSelecionado) => {
+            idsAssentos.push(assentoSelecionado.id);
+            numAssentos.push(assentoSelecionado.name);
+        }
+        );
 
         const dadosAssentos = {
             ids: idsAssentos,
@@ -47,9 +54,10 @@ export default function PaginaSessoes() {
             cpf: cpf
         }
 
-        console(dadosAssentos);
-
         axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", dadosAssentos);
+
+        setDadosSucesso({ ...dadosSucesso, nome: nome, cpf: cpf, assentos: numAssentos})
+        navigate("/sucesso");
     }
 
     return (
@@ -107,9 +115,7 @@ export default function PaginaSessoes() {
                     required
                 />
 
-                <Link to={"/sucesso"}>
-                    <button type="submit">Reservar assento(s)</button>
-                </Link>
+                <button type="submit">Reservar assento(s)</button>
             </form>
 
             {!dadosSessao.movie ?

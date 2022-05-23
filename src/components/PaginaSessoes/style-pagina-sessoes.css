@@ -88,8 +88,5 @@ input::placeholder {
     background-color: #E8833A;
     border: none;
     border-radius: 3px;
-}
-
-.forms a {
     margin: 50px auto 30px auto;
 }
