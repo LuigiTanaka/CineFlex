@@ -24,6 +24,7 @@ export default function PaginaSessoes({ dadosSucesso, setDadosSucesso }) {
     const [nome, setNome] = React.useState("");
     const [cpf, setCpf] = React.useState("");
     const navigate = useNavigate();
+    const assentosSelecionados = assentos.filter((assento) => assento.selecionado);
 
     React.useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`);
@@ -39,25 +40,28 @@ export default function PaginaSessoes({ dadosSucesso, setDadosSucesso }) {
 
     function submitForm(event) {
         event.preventDefault();
-        const idsAssentos = [];
-        const numAssentos = []
-        const assentosSelecionados = assentos.filter((assento) => assento.selecionado);
-        assentosSelecionados.map((assentoSelecionado) => {
-            idsAssentos.push(assentoSelecionado.id);
-            numAssentos.push(assentoSelecionado.name);
-        }
-        );
+        if(assentosSelecionados.length === 0) {
+            alert('escolha pelo menos um assento'); 
+        } else {
+            const idsAssentos = [];
+            const numAssentos = []
+            assentosSelecionados.map((assentoSelecionado) => {
+                idsAssentos.push(assentoSelecionado.id);
+                numAssentos.push(assentoSelecionado.name);
+            }
+            );
 
-        const dadosAssentos = {
-            ids: idsAssentos,
-            name: nome,
-            cpf: cpf
-        }
+            const dadosAssentos = {
+                ids: idsAssentos,
+                name: nome,
+                cpf: cpf
+            }
 
-        axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", dadosAssentos);
+            axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", dadosAssentos);
 
-        setDadosSucesso({ ...dadosSucesso, nome: nome, cpf: cpf, assentos: numAssentos})
-        navigate("/sucesso");
+            setDadosSucesso({ ...dadosSucesso, nome: nome, cpf: cpf, assentos: numAssentos})
+            navigate("/sucesso");
+        }     
     }
 
     return (
@@ -114,7 +118,7 @@ export default function PaginaSessoes({ dadosSucesso, setDadosSucesso }) {
                     onChange={(e) => setCpf(e.target.value)}
                     required
                 />
-
+                {}
                 <button type="submit">Reservar assento(s)</button>
             </form>
 
