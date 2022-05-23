@@ -1,0 +1,46 @@
+.pagina-3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagina-3 p {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 0.04em;
+    color: #293845;
+    padding: 45px 0 25px 0;
+    margin-top: 67px;
+}
+
+.assentos {
+    width: 330px;
+    height: 202px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.legenda {
+    width: 330px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.legenda > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.legenda h4 {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.013em;
+    color: #4E5A65;
+    margin-top: 8px;
+}

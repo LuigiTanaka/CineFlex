@@ -20,33 +20,6 @@
     margin-bottom: 117px;
 }
 
-.rodape {
-    width: 100%;
-    height: 117px;
-    background-color: #DFE6ED;
-    padding: 14px 10px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    position: fixed;
-    bottom: 0;
-}
-
-.rodape img {
-    width: 64px;
-    height: 89px;
-    padding: 8px;
-    background-color: #ffffff;
-    margin-right: 14px;
-}
-
-.rodape h2 {
-    font-weight: 400;
-    font-size: 26px;
-    line-height: 30px;
-    color: #293845;
-}
-
 .loading {
     width: 100%;
     display: flex;

@@ -30,3 +30,7 @@
     color: #FFFFFF;
     margin: 22px 8px 22px 0;
 }
+
+a {
+    text-decoration: none;
+}
